@@ -57,8 +57,9 @@
 											メールアドレス:
 										</label>
 										<label th:if="${#fields.hasErrors('mailAddress')}" th:errors="*{mailAddress}" class="error-messages">
-											メールアドレスを入力してください
+										メールアドレスを入力してください
 										</label>
+										<span th:text="${mailMessage}" class="error-messages"></span>
 										<input type="text" name="mailAddress" id="mailAddress" class="form-control" placeholder="yamada@mail.com"
 											 th:field="*{mailAddress}" th:errorclass="error-input" value="yamada@mail.com">
 									</div>

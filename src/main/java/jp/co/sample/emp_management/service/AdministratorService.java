@@ -1,6 +1,7 @@
 package jp.co.sample.emp_management.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,9 +25,19 @@ public class AdministratorService {
 	 * 管理者情報を登録します.
 	 * 
 	 * @param administrator 管理者情報
+	 * @throws Exception 
 	 */
-	public void insert(Administrator administrator) {
-		administratorRepository.insert(administrator);
+//	public void insert(Administrator administrator) {
+//		administratorRepository.insert(administrator);
+//	}
+	
+	public void insert(Administrator administrator) throws Exception {
+		String mailAddress = administrator.getMailAddress();
+		if(administratorRepository.findByMailAddress(mailAddress) == null) {
+			administratorRepository.insert(administrator);
+		} else {
+			throw new Exception("メールアドレスが重複しています");
+		}
 	}
 	
 	/**

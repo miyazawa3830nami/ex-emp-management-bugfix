@@ -1,17 +1,29 @@
 package jp.co.sample.emp_management.form;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
+import org.springframework.validation.annotation.Validated;
+
 /**
  * 管理者情報登録時に使用するフォーム.
  * 
  * @author igamasayuki
  * 
  */
+@Validated
 public class InsertAdministratorForm {
 	/** 名前 */
+	@NotBlank(message="名前を入力してください")
 	private String name;
 	/** メールアドレス */
+	@NotBlank(message="メールアドレスを入力してください")
+	@Email(message="メールアドレスの形式が不正です")
 	private String mailAddress;
 	/** パスワード */
+	@NotBlank(message="メールアドレスを入力してください")
+	@Pattern(regexp="^([a-zA-Z0-9]{8,})$",message="パスワードは8文字以上半角英数字にしてください")
 	private String password;
 
 	/**
