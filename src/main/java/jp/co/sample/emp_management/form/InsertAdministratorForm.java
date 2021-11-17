@@ -22,7 +22,7 @@ public class InsertAdministratorForm {
 	@Email(message="メールアドレスの形式が不正です")
 	private String mailAddress;
 	/** パスワード */
-	@NotBlank(message="メールアドレスを入力してください")
+	@NotBlank(message="パスワードを入力してください")
 	@Pattern(regexp="^([a-zA-Z0-9]{8,})$",message="パスワードは8文字以上半角英数字にしてください")
 	private String password;
 
