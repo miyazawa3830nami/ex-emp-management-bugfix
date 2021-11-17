@@ -1,5 +1,8 @@
 package jp.co.sample.emp_management.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.BeanUtils;
@@ -10,6 +13,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jp.co.sample.emp_management.domain.Administrator;
@@ -93,6 +98,20 @@ public class AdministratorController {
 		}
 		return "redirect:/";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/check", method=RequestMethod.POST)
+	public Map<String, String> check(String password,String checkPassword){
+	Map<String,String> map = new HashMap<>();
+	String checkMessage = null;
+	if(password.equals(checkPassword)) {
+		checkMessage = "";
+	} else {
+		checkMessage = "パスワードが一致していません";
+	}
+	map.put("checkMessage", checkMessage);
+	return map;
+	}
 
 	/////////////////////////////////////////////////////
 	// ユースケース：ログインをする
@@ -122,7 +141,8 @@ public class AdministratorController {
 		if (administrator == null) {
 			model.addAttribute("errorMessage", "メールアドレスまたはパスワードが不正です。");
 			return toLogin();
-		}
+		} 
+		session.setAttribute("administratorName",administrator.getName());
 		return "forward:/employee/showList";
 	}
 	

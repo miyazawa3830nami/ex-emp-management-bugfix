@@ -25,7 +25,10 @@ public class InsertAdministratorForm {
 	@NotBlank(message="パスワードを入力してください")
 	@Pattern(regexp="^([a-zA-Z0-9]{8,})$",message="パスワードは8文字以上半角英数字にしてください")
 	private String password;
-
+	/** 確認用パスワード */
+	@NotBlank(message="確認用パスワードを入力してください")
+	private String checkPassword;
+	
 	/**
 	 * @return the name
 	 */
@@ -68,10 +71,16 @@ public class InsertAdministratorForm {
 		this.password = password;
 	}
 	
+	public String getCheckPassword() {
+		return checkPassword;
+	}
+	public void setCheckPassword(String checkPassword) {
+		this.checkPassword = checkPassword;
+	}
+
 	@Override
 	public String toString() {
-		return "InsertAdministratorForm [name=" + name + ", mailAddress=" + mailAddress + ", password=" + password
-				+ "]";
+		return "InsertAdministratorForm [name=" + name + ", mailAddress=" + mailAddress + ", password=" + password + ", checkPassword=" + checkPassword + "]";
 	}
 	
 }
